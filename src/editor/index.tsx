@@ -38,6 +38,7 @@ interface EditorProps extends EditorConfig {
   onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
   onScroll?: (e: React.UIEvent<HTMLTextAreaElement | HTMLDivElement>, type: 'md' | 'html') => void;
+  handlePaste?: (e: React.SyntheticEvent) => void;
 }
 
 interface EditorState {
@@ -141,7 +142,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
     this.nodeMdPreviewWrapper = React.createRef();
 
     this.handleChange = this.handleChange.bind(this);
-    this.handlePaste = this.handlePaste.bind(this);
+    this.handlePaste = this.props.handlePaste || this.handlePaste.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
     this.handleToggleMenu = this.handleToggleMenu.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
